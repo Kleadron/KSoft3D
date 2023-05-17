@@ -6,7 +6,7 @@ R_TexID fontTex;
 char R_2D_tempTextBuffer[8191];
 
 // Marked as noinline because the pointer to imgPath gets clobbered on release builds
-__declspec(noinline) void R_2D_LoadDebugFont(const char *imgPath)
+void R_2D_LoadDebugFont(const char *imgPath)
 {
 	fontTex = R_LoadTex(imgPath, false, false);
 	fontLoaded = true;

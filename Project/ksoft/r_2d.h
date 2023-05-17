@@ -1,6 +1,6 @@
 #pragma once
 
-void R_2D_LoadDebugFont(const char imgPath);
+void R_2D_LoadDebugFont(const char *imgPath);
 
 void R_2D_ApplyProjection(const int left, const int right, const int bottom, const int top);
 
