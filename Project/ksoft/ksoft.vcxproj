@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{6F1CDAFF-91C4-4807-945C-A9A4EDA67E62}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>TerraMoles</RootNamespace>
+    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
+    <ProjectName>ksoft</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141_xp</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="epicfail.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="map.c" />
+    <ClCompile Include="r_2d.c" />
+    <ClCompile Include="r_3d.c" />
+    <ClCompile Include="r_core.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cglm\affine-mat.h" />
+    <ClInclude Include="cglm\affine-post.h" />
+    <ClInclude Include="cglm\affine-pre.h" />
+    <ClInclude Include="cglm\affine.h" />
+    <ClInclude Include="cglm\affine2d.h" />
+    <ClInclude Include="cglm\applesimd.h" />
+    <ClInclude Include="cglm\bezier.h" />
+    <ClInclude Include="cglm\box.h" />
+    <ClInclude Include="cglm\call.h" />
+    <ClInclude Include="cglm\call\affine.h" />
+    <ClInclude Include="cglm\call\affine2d.h" />
+    <ClInclude Include="cglm\call\bezier.h" />
+    <ClInclude Include="cglm\call\box.h" />
+    <ClInclude Include="cglm\call\cam.h" />
+    <ClInclude Include="cglm\call\clipspace\ortho_lh_no.h" />
+    <ClInclude Include="cglm\call\clipspace\ortho_lh_zo.h" />
+    <ClInclude Include="cglm\call\clipspace\ortho_rh_no.h" />
+    <ClInclude Include="cglm\call\clipspace\ortho_rh_zo.h" />
+    <ClInclude Include="cglm\call\clipspace\persp_lh_no.h" />
+    <ClInclude Include="cglm\call\clipspace\persp_lh_zo.h" />
+    <ClInclude Include="cglm\call\clipspace\persp_rh_no.h" />
+    <ClInclude Include="cglm\call\clipspace\persp_rh_zo.h" />
+    <ClInclude Include="cglm\call\clipspace\project_no.h" />
+    <ClInclude Include="cglm\call\clipspace\project_zo.h" />
+    <ClInclude Include="cglm\call\clipspace\view_lh_no.h" />
+    <ClInclude Include="cglm\call\clipspace\view_lh_zo.h" />
+    <ClInclude Include="cglm\call\clipspace\view_rh_no.h" />
+    <ClInclude Include="cglm\call\clipspace\view_rh_zo.h" />
+    <ClInclude Include="cglm\call\curve.h" />
+    <ClInclude Include="cglm\call\ease.h" />
+    <ClInclude Include="cglm\call\euler.h" />
+    <ClInclude Include="cglm\call\frustum.h" />
+    <ClInclude Include="cglm\call\io.h" />
+    <ClInclude Include="cglm\call\ivec2.h" />
+    <ClInclude Include="cglm\call\ivec3.h" />
+    <ClInclude Include="cglm\call\ivec4.h" />
+    <ClInclude Include="cglm\call\mat2.h" />
+    <ClInclude Include="cglm\call\mat3.h" />
+    <ClInclude Include="cglm\call\mat4.h" />
+    <ClInclude Include="cglm\call\plane.h" />
+    <ClInclude Include="cglm\call\project.h" />
+    <ClInclude Include="cglm\call\quat.h" />
+    <ClInclude Include="cglm\call\ray.h" />
+    <ClInclude Include="cglm\call\sphere.h" />
+    <ClInclude Include="cglm\call\vec2.h" />
+    <ClInclude Include="cglm\call\vec3.h" />
+    <ClInclude Include="cglm\call\vec4.h" />
+    <ClInclude Include="cglm\cam.h" />
+    <ClInclude Include="cglm\cglm.h" />
+    <ClInclude Include="cglm\clipspace\ortho_lh_no.h" />
+    <ClInclude Include="cglm\clipspace\ortho_lh_zo.h" />
+    <ClInclude Include="cglm\clipspace\ortho_rh_no.h" />
+    <ClInclude Include="cglm\clipspace\ortho_rh_zo.h" />
+    <ClInclude Include="cglm\clipspace\persp.h" />
+    <ClInclude Include="cglm\clipspace\persp_lh_no.h" />
+    <ClInclude Include="cglm\clipspace\persp_lh_zo.h" />
+    <ClInclude Include="cglm\clipspace\persp_rh_no.h" />
+    <ClInclude Include="cglm\clipspace\persp_rh_zo.h" />
+    <ClInclude Include="cglm\clipspace\project_no.h" />
+    <ClInclude Include="cglm\clipspace\project_zo.h" />
+    <ClInclude Include="cglm\clipspace\view_lh.h" />
+    <ClInclude Include="cglm\clipspace\view_lh_no.h" />
+    <ClInclude Include="cglm\clipspace\view_lh_zo.h" />
+    <ClInclude Include="cglm\clipspace\view_rh.h" />
+    <ClInclude Include="cglm\clipspace\view_rh_no.h" />
+    <ClInclude Include="cglm\clipspace\view_rh_zo.h" />
+    <ClInclude Include="cglm\color.h" />
+    <ClInclude Include="cglm\common.h" />
+    <ClInclude Include="cglm\curve.h" />
+    <ClInclude Include="cglm\ease.h" />
+    <ClInclude Include="cglm\euler.h" />
+    <ClInclude Include="cglm\frustum.h" />
+    <ClInclude Include="cglm\io.h" />
+    <ClInclude Include="cglm\ivec2.h" />
+    <ClInclude Include="cglm\ivec3.h" />
+    <ClInclude Include="cglm\ivec4.h" />
+    <ClInclude Include="cglm\mat2.h" />
+    <ClInclude Include="cglm\mat3.h" />
+    <ClInclude Include="cglm\mat4.h" />
+    <ClInclude Include="cglm\plane.h" />
+    <ClInclude Include="cglm\project.h" />
+    <ClInclude Include="cglm\quat.h" />
+    <ClInclude Include="cglm\ray.h" />
+    <ClInclude Include="cglm\simd\arm.h" />
+    <ClInclude Include="cglm\simd\avx\affine.h" />
+    <ClInclude Include="cglm\simd\avx\mat4.h" />
+    <ClInclude Include="cglm\simd\intrin.h" />
+    <ClInclude Include="cglm\simd\neon\affine.h" />
+    <ClInclude Include="cglm\simd\neon\mat2.h" />
+    <ClInclude Include="cglm\simd\neon\mat4.h" />
+    <ClInclude Include="cglm\simd\neon\quat.h" />
+    <ClInclude Include="cglm\simd\sse2\affine.h" />
+    <ClInclude Include="cglm\simd\sse2\mat2.h" />
+    <ClInclude Include="cglm\simd\sse2\mat3.h" />
+    <ClInclude Include="cglm\simd\sse2\mat4.h" />
+    <ClInclude Include="cglm\simd\sse2\quat.h" />
+    <ClInclude Include="cglm\simd\x86.h" />
+    <ClInclude Include="cglm\sphere.h" />
+    <ClInclude Include="cglm\struct.h" />
+    <ClInclude Include="cglm\struct\affine-post.h" />
+    <ClInclude Include="cglm\struct\affine-pre.h" />
+    <ClInclude Include="cglm\struct\affine.h" />
+    <ClInclude Include="cglm\struct\affine2d.h" />
+    <ClInclude Include="cglm\struct\box.h" />
+    <ClInclude Include="cglm\struct\cam.h" />
+    <ClInclude Include="cglm\struct\clipspace\ortho_lh_no.h" />
+    <ClInclude Include="cglm\struct\clipspace\ortho_lh_zo.h" />
+    <ClInclude Include="cglm\struct\clipspace\ortho_rh_no.h" />
+    <ClInclude Include="cglm\struct\clipspace\ortho_rh_zo.h" />
+    <ClInclude Include="cglm\struct\clipspace\persp_lh_no.h" />
+    <ClInclude Include="cglm\struct\clipspace\persp_lh_zo.h" />
+    <ClInclude Include="cglm\struct\clipspace\persp_rh_no.h" />
+    <ClInclude Include="cglm\struct\clipspace\persp_rh_zo.h" />
+    <ClInclude Include="cglm\struct\clipspace\project_no.h" />
+    <ClInclude Include="cglm\struct\clipspace\project_zo.h" />
+    <ClInclude Include="cglm\struct\clipspace\view_lh_no.h" />
+    <ClInclude Include="cglm\struct\clipspace\view_lh_zo.h" />
+    <ClInclude Include="cglm\struct\clipspace\view_rh_no.h" />
+    <ClInclude Include="cglm\struct\clipspace\view_rh_zo.h" />
+    <ClInclude Include="cglm\struct\color.h" />
+    <ClInclude Include="cglm\struct\curve.h" />
+    <ClInclude Include="cglm\struct\euler.h" />
+    <ClInclude Include="cglm\struct\frustum.h" />
+    <ClInclude Include="cglm\struct\io.h" />
+    <ClInclude Include="cglm\struct\mat2.h" />
+    <ClInclude Include="cglm\struct\mat3.h" />
+    <ClInclude Include="cglm\struct\mat4.h" />
+    <ClInclude Include="cglm\struct\plane.h" />
+    <ClInclude Include="cglm\struct\project.h" />
+    <ClInclude Include="cglm\struct\quat.h" />
+    <ClInclude Include="cglm\struct\sphere.h" />
+    <ClInclude Include="cglm\struct\vec2-ext.h" />
+    <ClInclude Include="cglm\struct\vec2.h" />
+    <ClInclude Include="cglm\struct\vec3-ext.h" />
+    <ClInclude Include="cglm\struct\vec3.h" />
+    <ClInclude Include="cglm\struct\vec4-ext.h" />
+    <ClInclude Include="cglm\struct\vec4.h" />
+    <ClInclude Include="cglm\types-struct.h" />
+    <ClInclude Include="cglm\types.h" />
+    <ClInclude Include="cglm\util.h" />
+    <ClInclude Include="cglm\vec2-ext.h" />
+    <ClInclude Include="cglm\vec2.h" />
+    <ClInclude Include="cglm\vec3-ext.h" />
+    <ClInclude Include="cglm\vec3.h" />
+    <ClInclude Include="cglm\vec4-ext.h" />
+    <ClInclude Include="cglm\vec4.h" />
+    <ClInclude Include="cglm\version.h" />
+    <ClInclude Include="defines_base.h" />
+    <ClInclude Include="epicfail.h" />
+    <ClInclude Include="globals_base.h" />
+    <ClInclude Include="includes_base.h" />
+    <ClInclude Include="map.h" />
+    <ClInclude Include="r_2d.h" />
+    <ClInclude Include="r_3d.h" />
+    <ClInclude Include="r_core.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\sdl2.nuget.redist.2.26.5\build\native\sdl2.nuget.redist.targets" Condition="Exists('..\packages\sdl2.nuget.redist.2.26.5\build\native\sdl2.nuget.redist.targets')" />
+    <Import Project="..\packages\sdl2.nuget.2.26.5\build\native\sdl2.nuget.targets" Condition="Exists('..\packages\sdl2.nuget.2.26.5\build\native\sdl2.nuget.targets')" />
+    <Import Project="..\packages\sdl2_image.nuget.redist.2.6.3\build\native\sdl2_image.nuget.redist.targets" Condition="Exists('..\packages\sdl2_image.nuget.redist.2.6.3\build\native\sdl2_image.nuget.redist.targets')" />
+    <Import Project="..\packages\sdl2_image.nuget.2.6.3\build\native\sdl2_image.nuget.targets" Condition="Exists('..\packages\sdl2_image.nuget.2.6.3\build\native\sdl2_image.nuget.targets')" />
+    <Import Project="..\packages\sdl2_net.nuget.redist.2.2.0\build\native\sdl2_net.nuget.redist.targets" Condition="Exists('..\packages\sdl2_net.nuget.redist.2.2.0\build\native\sdl2_net.nuget.redist.targets')" />
+    <Import Project="..\packages\sdl2_net.nuget.2.2.0\build\native\sdl2_net.nuget.targets" Condition="Exists('..\packages\sdl2_net.nuget.2.2.0\build\native\sdl2_net.nuget.targets')" />
+    <Import Project="..\packages\sdl2_mixer.nuget.redist.2.6.3\build\native\sdl2_mixer.nuget.redist.targets" Condition="Exists('..\packages\sdl2_mixer.nuget.redist.2.6.3\build\native\sdl2_mixer.nuget.redist.targets')" />
+    <Import Project="..\packages\sdl2_mixer.nuget.2.6.3\build\native\sdl2_mixer.nuget.targets" Condition="Exists('..\packages\sdl2_mixer.nuget.2.6.3\build\native\sdl2_mixer.nuget.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\sdl2.nuget.redist.2.26.5\build\native\sdl2.nuget.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2.nuget.redist.2.26.5\build\native\sdl2.nuget.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\sdl2.nuget.2.26.5\build\native\sdl2.nuget.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2.nuget.2.26.5\build\native\sdl2.nuget.targets'))" />
+    <Error Condition="!Exists('..\packages\sdl2_image.nuget.redist.2.6.3\build\native\sdl2_image.nuget.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2_image.nuget.redist.2.6.3\build\native\sdl2_image.nuget.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\sdl2_image.nuget.2.6.3\build\native\sdl2_image.nuget.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2_image.nuget.2.6.3\build\native\sdl2_image.nuget.targets'))" />
+    <Error Condition="!Exists('..\packages\sdl2_net.nuget.redist.2.2.0\build\native\sdl2_net.nuget.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2_net.nuget.redist.2.2.0\build\native\sdl2_net.nuget.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\sdl2_net.nuget.2.2.0\build\native\sdl2_net.nuget.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2_net.nuget.2.2.0\build\native\sdl2_net.nuget.targets'))" />
+    <Error Condition="!Exists('..\packages\sdl2_mixer.nuget.redist.2.6.3\build\native\sdl2_mixer.nuget.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2_mixer.nuget.redist.2.6.3\build\native\sdl2_mixer.nuget.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\sdl2_mixer.nuget.2.6.3\build\native\sdl2_mixer.nuget.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\sdl2_mixer.nuget.2.6.3\build\native\sdl2_mixer.nuget.targets'))" />
+  </Target>
+</Project>

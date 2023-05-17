@@ -3,6 +3,11 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+#ksoft
+Project/ksoft/content
+Project/ksoft/engine.ini
+Project/ksoft/user.init
+
 # User-specific files
 *.rsuser
 *.suo
