@@ -54,7 +54,38 @@ void R_3D_Init()
 	memset(models, 0, sizeof(models));
 }
 
-void SubmitMesh(R_3D_MeshInfo *mesh)
+void R_3D_DrawLine(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2, const R_ColorRGBA color)
+{
+	glDisable(GL_TEXTURE_2D);
+
+	glColor4ubv((unsigned char*)&color);
+
+	glBegin(GL_LINES);
+	glVertex3f(x1, y1, z1);
+	glVertex3f(x2, y2, z2);
+	glEnd();
+}
+
+void R_3D_DrawWireBox(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2, const R_ColorRGBA color)
+{
+	R_3D_DrawLine(x1, y1, z1, x2, y1, z1, color);
+	R_3D_DrawLine(x1, y1, z2, x2, y1, z2, color);
+	R_3D_DrawLine(x1, y1, z1, x1, y1, z2, color);
+	R_3D_DrawLine(x2, y1, z1, x2, y1, z2, color);
+
+	R_3D_DrawLine(x1, y1, z1, x1, y2, z1, color);
+	R_3D_DrawLine(x2, y1, z1, x2, y2, z1, color);
+	R_3D_DrawLine(x1, y1, z2, x1, y2, z2, color);
+	R_3D_DrawLine(x2, y1, z2, x2, y2, z2, color);
+
+	R_3D_DrawLine(x1, y2, z1, x2, y2, z1, color);
+	R_3D_DrawLine(x1, y2, z2, x2, y2, z2, color);
+	R_3D_DrawLine(x1, y2, z1, x1, y2, z2, color);
+	R_3D_DrawLine(x2, y2, z1, x2, y2, z2, color);
+}
+
+// TODO: Try glVertexPointer stuff instead of glBegin and glEnd. Also see if GL_TRIANGLE would be a better performing primitive.
+void SubmitMesh(const R_3D_MeshInfo *mesh)
 {
 	int lastNormal = -1;
 
@@ -70,7 +101,7 @@ void SubmitMesh(R_3D_MeshInfo *mesh)
 			if (mesh->hasUVs)
 			{
 				vec2 *uv = &mesh->uvs[facevert->uv];
-				glTexCoord2fv(uv);
+				glTexCoord2fv((const GLfloat*)uv);
 			}
 
 			if (mesh->hasNormals)
@@ -78,13 +109,13 @@ void SubmitMesh(R_3D_MeshInfo *mesh)
 				if (facevert->normal != lastNormal)
 				{
 					vec3 *normal = &mesh->normals[facevert->normal];
-					glNormal3fv(normal);
+					glNormal3fv((const GLfloat*)normal);
 					lastNormal = facevert->normal;
 				}
 			}
 
 			vec3 *vertex = &mesh->vertices[facevert->vertex];
-			glVertex3fv(vertex);
+			glVertex3fv((const GLfloat*)vertex);
 		}
 		glEnd();
 
@@ -93,7 +124,8 @@ void SubmitMesh(R_3D_MeshInfo *mesh)
 	}
 }
 
-// Loads an OBJ mesh from the specified path
+// Loads an OBJ mesh from the specified path.
+// TODO: Count the number of vertices/faces etc in the file and allocate all of the memory once.
 R_3D_MeshID R_3D_LoadMesh(const char *path, const float scale)
 {
 	CheckFail(path == NULL, 0, "R_3D_LoadMesh path is null", path, FAILFLAG_CANCONTINUE);
@@ -145,9 +177,9 @@ R_3D_MeshID R_3D_LoadMesh(const char *path, const float scale)
 
 		if (strcmp(linetoken, "v") == 0)
 		{
-			float x = atof(strtok(NULL, " "));
-			float y = atof(strtok(NULL, " "));
-			float z = atof(strtok(NULL, " "));
+			float x = (float)atof(strtok(NULL, " "));
+			float y = (float)atof(strtok(NULL, " "));
+			float z = (float)atof(strtok(NULL, " "));
 
 			model->numVertices++;
 			model->vertices = realloc(model->vertices, sizeof(vec3) * model->numVertices);
@@ -158,9 +190,9 @@ R_3D_MeshID R_3D_LoadMesh(const char *path, const float scale)
 
 		if (strcmp(linetoken, "vn") == 0)
 		{
-			float x = atof(strtok(NULL, " "));
-			float y = atof(strtok(NULL, " "));
-			float z = atof(strtok(NULL, " "));
+			float x = (float)atof(strtok(NULL, " "));
+			float y = (float)atof(strtok(NULL, " "));
+			float z = (float)atof(strtok(NULL, " "));
 
 			model->numNormals++;
 			model->normals = realloc(model->normals, sizeof(vec3) * model->numNormals);
@@ -172,8 +204,8 @@ R_3D_MeshID R_3D_LoadMesh(const char *path, const float scale)
 
 		if (strcmp(linetoken, "vt") == 0)
 		{
-			float u = atof(strtok(NULL, " "));
-			float v = atof(strtok(NULL, " "));
+			float u = (float)atof(strtok(NULL, " "));
+			float v = (float)atof(strtok(NULL, " "));
 
 			model->numUVs++;
 			model->uvs = realloc(model->uvs, sizeof(vec2) * model->numUVs);
@@ -199,15 +231,15 @@ R_3D_MeshID R_3D_LoadMesh(const char *path, const float scale)
 				bool readNorm = false;
 
 				char *uv = strchr(vert, '/');
-				if (uv != NULL)
+				if (uv != '\0')
 				{
-					*uv = NULL;
+					*uv = '\0';
 					uv++;
 				}
 				char *norm = strchr(uv, '/');
-				if (norm != NULL)
+				if (norm != '\0')
 				{
-					*norm = NULL;
+					*norm = '\0';
 					norm++;
 				}
 
@@ -253,11 +285,15 @@ R_3D_MeshID R_3D_LoadMesh(const char *path, const float scale)
 
 
 
-void R_3D_DrawMesh(float x, float y, float z, float pitch, float yaw, R_ColorRGBA color, R_3D_MeshID modelID, R_TexID texID)
+void R_3D_DrawMesh(const float x, const float y, const float z, const float pitch, const float yaw, const float roll, const R_ColorRGBA color, const R_3D_MeshID modelID, const R_TexID texID)
 {
+	if (modelID < 0)
+		return;
+
 	R_3D_MeshInfo *model = &models[modelID];
 
-	if (model->hasUVs)
+	// you can now use texID -1 to force no texture
+	if (texID >= 0 && model->hasUVs)
 	{
 		glEnable(GL_TEXTURE_2D);
 		R_BindTex(texID);
@@ -272,8 +308,10 @@ void R_3D_DrawMesh(float x, float y, float z, float pitch, float yaw, R_ColorRGB
 
 	glPushMatrix();
 	glTranslatef(x, y, z);
+	
 	glRotatef(yaw, 0, 1, 0);
 	glRotatef(pitch, 1, 0, 0);
+	glRotatef(roll, 0, 0, 1);
 
 	glColor4ubv((unsigned char*)&color);
 	//glBegin(GL_TRIANGLES);
@@ -298,7 +336,7 @@ void R_3D_ApplyProjection(const float fov, const float aspectRatio, const float 
 	glMatrixMode(GL_MODELVIEW);
 }
 
-void R_3D_SetViewpoint(float x, float y, float z, float pitch, float yaw)
+void R_3D_SetViewpoint(const float x, const float y, const float z, const float pitch, const float yaw)
 {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();

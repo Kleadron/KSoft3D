@@ -32,7 +32,7 @@ R_TexID nextTexSlot = 0;
 
 float clearR, clearG, clearB;
 
-void R_Init(const SDL_Window *window)
+void R_Init(SDL_Window *window)
 {
 	if (g_newIni)
 	{
@@ -132,7 +132,7 @@ void R_Clear(const bool color, const bool depth)
 	R_CheckError();
 }
 
-void R_Present(const SDL_Window *window)
+void R_Present(SDL_Window *window)
 {
 	// display to screen
 	SDL_GL_SwapWindow(window);

@@ -3,7 +3,7 @@
 typedef int R_TexID;
 typedef unsigned int R_ColorRGBA;
 
-void R_Init(const SDL_Window *window);
+void R_Init(SDL_Window *window);
 void R_CheckError();
 
 void R_SetViewport(const int x, const int y, const int width, const int height);
@@ -11,7 +11,7 @@ void R_SetViewport(const int x, const int y, const int width, const int height);
 void R_SetClearColor(const float r, const float g, const float b);
 void R_Clear(const bool color, const bool depth);
 
-void R_Present(const SDL_Window *window);
+void R_Present(SDL_Window *window);
 
 void R_ResetView();
 

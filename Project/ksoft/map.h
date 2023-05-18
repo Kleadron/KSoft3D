@@ -11,5 +11,6 @@ int Map_GetLength();
 
 void Map_Set(const int x, const int y, const int z, const Map_TileID id);
 Map_TileID Map_Get(const int x, const int y, const int z);
+bool Map_Obscured(const int x, const int y, const int z);
 
 void Map_Draw();

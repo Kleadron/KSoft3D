@@ -13,7 +13,7 @@
 bool running = true;
 int screenWidth = 720, screenHeight = 480;
 SDL_Window *window;
-double updateFrequency = 1.0 / 30.0;
+float updateFrequency = 1.0f / 30.0f;
 int maxFrameUpdates = 2;
 bool fullscreen = false;
 int frameCounterTracker = 0;
@@ -34,7 +34,7 @@ float g_interp; // interpolation value 0-1 from previous to current update
 int g_inputTick;
 
 // functions
-bool file_exists(char *filename)
+bool file_exists(const char *filename)
 {
 	struct stat   buffer;
 	return (stat(filename, &buffer) == 0);
@@ -152,7 +152,7 @@ void GameLoad()
 void GameUpdate()
 {
 	lastsquarepos = squarepos;
-	squarepos = (screenWidth / 2) + sin(g_updateTotal) * (screenWidth / 2);
+	squarepos = (screenWidth / 2) + sinf(g_updateTotal) * (screenWidth / 2);
 	
 	lastCubeTime = cubeTime;
 	cubeTime = g_updateTotal * 1.0f;
@@ -236,7 +236,7 @@ void GameRender()
 	R_EnableBackfaceCulling();
 	R_EnableDepthTest();
 	R_ResetView();
-	R_3D_ApplyProjection(80, (float)screenWidth / (float)screenHeight, 0.05, 200);
+	R_3D_ApplyProjection(80, (float)screenWidth / (float)screenHeight, 0.05f, 200);
 
 	vec3 frameViewpoint = {0, 0, 0};
 
@@ -258,9 +258,13 @@ void GameRender()
 	R_3D_DrawModel(0, 0, -3, g_frameTotal * 90, g_frameTotal * 75, COLOR_WHITE, mdl_test);*/
 
 	float cubeInterp = glm_lerp(lastCubeTime, cubeTime, g_interp);
-	R_3D_DrawMesh(3, 1, 3.5f, cubeInterp * 90, cubeInterp * 75, COLOR_WHITE, mesh_test, 0);
+	R_3D_DrawMesh(3, 2, 3, cubeInterp * 90, cubeInterp * 75, 0, COLOR_WHITE, mesh_test, 0);
+
+	
 
 	R_DisableLighting();
+
+	R_3D_DrawWireBox(1, 1.1f, 1, 5, 3, 5, MAKE_RGBA(0, 255, 255, 255));
 
 	Map_Draw();
 

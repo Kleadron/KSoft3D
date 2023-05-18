@@ -5,4 +5,4 @@ extern float g_updateDelta, g_updateTotal, g_frameDelta, g_frameTotal;
 extern int g_inputTick;
 
 // functions
-extern bool file_exists(char *filename);
+extern bool file_exists(const char *filename);

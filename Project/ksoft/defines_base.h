@@ -13,3 +13,11 @@
 #define GET_COLOR_A(color) (unsigned int)((color >> 24) & 255)
 
 //#define LERP(a, b, f) (a * (1.0f - f) + (b * f))
+
+#define POS_X 0
+#define POS_Y 1
+#define POS_Z 2
+
+#define ANGLE_PITCH 0
+#define ANGLE_YAW 1 
+#define ANGLE_ROLL 2
