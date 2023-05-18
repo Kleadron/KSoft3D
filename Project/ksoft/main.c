@@ -147,6 +147,10 @@ void GameLoad()
 			Map_Set(x, 0, z, 1);
 		}
 	}
+
+	Map_Set(6, 1, 6, 1);
+	Map_Set(8, 1, 6, 1);
+	Map_Set(8, 2, 6, 1);
 }
 
 void GameUpdate()
@@ -248,9 +252,9 @@ void GameRender()
 	R_EnableLighting();
 	
 	R_ToggleLight(0, true);
-	R_SetLightPos(0, (vec4) { 0, 1, 1, 0 });
-	R_SetLightDiffuse(0, (vec4) { 1, 1, 1, 1 });
-	R_SetLightAmbient(0, (vec4) { 0.25f, 0.25f, 0.25f, 1 });
+	R_SetLightPos(0, (vec4) { 0.2f, 0.9f, 0.1f, 0 });
+	R_SetLightDiffuse(0, (vec4) { 1.2f, 1.2f, 1.2f, 1 });
+	R_SetLightAmbient(0, (vec4) { 0.7f, 0.7f, 0.7f, 1 });
 	//R_SetLightSpecular(0, (vec4) { 0.5f, 0.5f, 0.5f, 1 });
 
 	/*R_3D_DrawModel(0, 0, -3, (g_frameTotal * 90) - 4, (g_frameTotal * 75) - 4, MAKE_RGBA(128, 128, 128, 255), mdl_test);
@@ -260,13 +264,16 @@ void GameRender()
 	float cubeInterp = glm_lerp(lastCubeTime, cubeTime, g_interp);
 	R_3D_DrawMesh(3, 2, 3, cubeInterp * 90, cubeInterp * 75, 0, COLOR_WHITE, mesh_test, 0);
 
-	
+	R_SetLightDiffuse(0, (vec4) { 1.5f, 1.5f, 1.5f, 1 });
+	R_SetLightAmbient(0, (vec4) { 1.0f, 1.0f, 1.0f, 1 });
+
+	Map_Draw();
 
 	R_DisableLighting();
 
 	R_3D_DrawWireBox(1, 1.1f, 1, 5, 3, 5, MAKE_RGBA(0, 255, 255, 255));
 
-	Map_Draw();
+	
 
 
 	R_DisableDepthTest();
