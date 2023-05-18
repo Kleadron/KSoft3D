@@ -157,6 +157,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="epicfail.c" />
+    <ClCompile Include="input.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="map.c" />
     <ClCompile Include="r_2d.c" />
@@ -318,6 +319,7 @@
     <ClInclude Include="epicfail.h" />
     <ClInclude Include="globals_base.h" />
     <ClInclude Include="includes_base.h" />
+    <ClInclude Include="input.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="r_2d.h" />
     <ClInclude Include="r_3d.h" />

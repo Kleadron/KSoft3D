@@ -12,4 +12,4 @@
 #define GET_COLOR_B(color) (unsigned int)((color >> 16) & 255)
 #define GET_COLOR_A(color) (unsigned int)((color >> 24) & 255)
 
-#define LERP(a, b, f) (a * (1.0f - f) + (b * f))
+//#define LERP(a, b, f) (a * (1.0f - f) + (b * f))

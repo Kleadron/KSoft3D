@@ -6,6 +6,7 @@
 #include "r_2d.h"
 #include "r_3d.h"
 #include "map.h"
+#include "input.h"
 #include <sys/stat.h>
 
 // private variabl;es....
@@ -30,6 +31,7 @@ bool showdebug = false;
 bool g_newIni = false;
 float g_updateDelta, g_updateTotal, g_frameDelta, g_frameTotal;
 float g_interp; // interpolation value 0-1 from previous to current update
+int g_inputTick;
 
 // functions
 bool file_exists(char *filename)
@@ -81,6 +83,8 @@ void HandleInputKey(SDL_KeyCode key, bool pressed)
 			break;
 		}
 	}
+
+
 }
 
 void UpdateEvents()
@@ -102,9 +106,11 @@ void UpdateEvents()
 			break;
 		case SDL_KEYDOWN:
 			HandleInputKey(ev.key.keysym.sym, true);
+			Input_HandleScancodeEvent(ev.key.keysym.scancode, true);
 			break;
 		case SDL_KEYUP:
 			HandleInputKey(ev.key.keysym.sym, false);
+			Input_HandleScancodeEvent(ev.key.keysym.scancode, false);
 			break;
 		}
 	}
@@ -115,12 +121,20 @@ Uint64 startUpdateCounter, lastUpdateCounter;
 
 float squarepos, lastsquarepos;
 float cubeTime, lastCubeTime;
-R_TexID tex_test;
+R_TexID tex_test, tex_crosshair;
 R_3D_MeshID mesh_test;
+
+vec3 camViewpoint = {0.5f, 2.0f, 0.5f};
+vec3 lastCamViewpoint = { 0.5f, 2.0f, 0.5f };
+float camPitch = -15;
+float lastCamPitch = -15;
+float camYaw = 225;
+float lastCamYaw = 225;
 
 void GameLoad()
 {
 	tex_test = R_LoadTex("content/images/kyo_test.png", true, true);
+	tex_crosshair = R_LoadTex("content/images/crosshair_default.png", false, false);
 	mesh_test = R_3D_LoadMesh("content/meshes/funkybox.obj", 1.0f);
 
 	//Mix_Music *music = Mix_LoadMUS("music/storm_6_alt_2.mp3");
@@ -142,6 +156,65 @@ void GameUpdate()
 	
 	lastCubeTime = cubeTime;
 	cubeTime = g_updateTotal * 1.0f;
+
+	lastCamPitch = camPitch;
+	lastCamYaw = camYaw;
+
+	if (Input_IsKeyDown(SDL_SCANCODE_UP))
+	{
+		camPitch += 90 * g_updateDelta;
+	}
+	if (Input_IsKeyDown(SDL_SCANCODE_DOWN))
+	{
+		camPitch -= 90 * g_updateDelta;
+	}
+	if (Input_IsKeyDown(SDL_SCANCODE_LEFT))
+	{
+		camYaw += 90 * g_updateDelta;
+	}
+	if (Input_IsKeyDown(SDL_SCANCODE_RIGHT))
+	{
+		camYaw -= 90 * g_updateDelta;
+	}
+
+	vec3 forward = { -sinf(glm_rad(camYaw)), 0, -cosf(glm_rad(camYaw))};
+	vec3 left = { -sinf(glm_rad(camYaw) + CGLM_PI_2), 0, -cosf(glm_rad(camYaw) + CGLM_PI_2) };
+
+	vec3 moveTarget = {0, 0, 0};
+
+	if (Input_IsKeyDown(SDL_SCANCODE_W))
+	{
+		glm_vec3_add(moveTarget, forward, moveTarget);
+	}
+	if (Input_IsKeyDown(SDL_SCANCODE_S))
+	{
+		glm_vec3_sub(moveTarget, forward, moveTarget);
+	}
+	if (Input_IsKeyDown(SDL_SCANCODE_A))
+	{
+		glm_vec3_add(moveTarget, left, moveTarget);
+	}
+	if (Input_IsKeyDown(SDL_SCANCODE_D))
+	{
+		glm_vec3_sub(moveTarget, left, moveTarget);
+	}
+
+	glm_vec3_normalize(moveTarget);
+
+	if (Input_IsKeyDown(SDL_SCANCODE_Q))
+	{
+		moveTarget[1] -= 1;
+	}
+	if (Input_IsKeyDown(SDL_SCANCODE_E))
+	{
+		moveTarget[1] += 1;
+	}
+
+
+	glm_vec3_scale(moveTarget, g_updateDelta * 4, moveTarget);
+
+	glm_vec3_copy(camViewpoint, lastCamViewpoint);
+	glm_vec3_add(camViewpoint, moveTarget, camViewpoint);
 }
 
 void DisplayGameTiming(int x, int y)
@@ -164,7 +237,13 @@ void GameRender()
 	R_EnableDepthTest();
 	R_ResetView();
 	R_3D_ApplyProjection(80, (float)screenWidth / (float)screenHeight, 0.05, 200);
-	R_3D_SetViewpoint(0.5f, 2, 0.5f, -15, 225);
+
+	vec3 frameViewpoint = {0, 0, 0};
+
+	glm_vec3_lerp(lastCamViewpoint, camViewpoint, g_interp, frameViewpoint);
+
+	R_3D_SetViewpoint(frameViewpoint[0], frameViewpoint[1], frameViewpoint[2], 
+		glm_lerp(lastCamPitch, camPitch, g_interp), glm_lerp(lastCamYaw, camYaw, g_interp));
 
 	R_EnableLighting();
 	
@@ -178,7 +257,7 @@ void GameRender()
 	R_3D_DrawModel(0, 0, -3, (g_frameTotal * 90) - 2, (g_frameTotal * 75) - 2, MAKE_RGBA(192, 192, 192, 255), mdl_test);
 	R_3D_DrawModel(0, 0, -3, g_frameTotal * 90, g_frameTotal * 75, COLOR_WHITE, mdl_test);*/
 
-	float cubeInterp = LERP(lastCubeTime, cubeTime, g_interp);
+	float cubeInterp = glm_lerp(lastCubeTime, cubeTime, g_interp);
 	R_3D_DrawMesh(3, 1, 3.5f, cubeInterp * 90, cubeInterp * 75, COLOR_WHITE, mesh_test, 0);
 
 	R_DisableLighting();
@@ -207,12 +286,13 @@ void GameRender()
 		DisplayGameTiming(debugX, debugY + 70);
 	}
 	
+	R_2D_DrawTexRect_WH(screenWidth / 2 - 16, screenHeight / 2 - 16, 32, 32, COLOR_WHITE, tex_crosshair);
 }
 
 // MAIN!!!! :D
 int main(int argc, char **argv)
 {
-	printf("KSoft 3D Tile Engine (c) Kleadron Software 2023\n");
+	printf("KSoft3D (c) Kleadron Software 2023\n");
 	printf("This is IN-DEVELOPMENT software and may not work correctly.\nYOU HAVE BEEN WARNED!\n");
 #if _DEBUG
 	printf("Built with Debug configuration.\n");
@@ -249,7 +329,7 @@ int main(int argc, char **argv)
 	}
 
 	int windowflags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
-	window = SDL_CreateWindow("KSoft 3D Tile Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, windowflags);
+	window = SDL_CreateWindow("KSoft3D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, windowflags);
 	CheckFail(window == NULL, 0, "Window creation failed", NULL, 0);
 
 	printf("done...\n");
@@ -284,6 +364,8 @@ int main(int argc, char **argv)
 	Map_Create(32, 16, 32);
 
 	printf("done...\n");
+
+	Input_Init();
 
 	// done initializing
 	printf("inited :)\n");
@@ -336,6 +418,7 @@ int main(int argc, char **argv)
 
 				// tick
 				GameUpdate();
+				g_inputTick++;
 			}
 		}
 
