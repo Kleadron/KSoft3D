@@ -7,7 +7,7 @@ char R_2D_tempTextBuffer[8191];
 
 void R_2D_LoadDebugFont(const char *imgPath)
 {
-	fontTex = R_LoadTex(imgPath, false, false);
+	fontTex = R_LoadTex(imgPath, false, false, false);
 	fontLoaded = true;
 }
 

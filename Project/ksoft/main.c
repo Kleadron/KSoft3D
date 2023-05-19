@@ -6,6 +6,7 @@
 #include "r_2d.h"
 #include "r_3d.h"
 #include "map.h"
+#include "unit.h"
 #include "input.h"
 #include <sys/stat.h>
 
@@ -36,6 +37,7 @@ int g_inputTick;
 // functions
 bool file_exists(const char *filename)
 {
+	return true;
 	struct stat   buffer;
 	return (stat(filename, &buffer) == 0);
 }
@@ -133,8 +135,8 @@ float lastCamYaw = 225;
 
 void GameLoad()
 {
-	tex_test = R_LoadTex("content/images/kyo_test.png", true, true);
-	tex_crosshair = R_LoadTex("content/images/crosshair_default.png", false, false);
+	tex_test = R_LoadTex("content/images/kyo_test.png", true, true, false);
+	tex_crosshair = R_LoadTex("content/images/crosshair_default.png", false, false, false);
 	mesh_test = R_3D_LoadMesh("content/meshes/funkybox.obj", 1.0f);
 
 	//Mix_Music *music = Mix_LoadMUS("music/storm_6_alt_2.mp3");
@@ -270,6 +272,7 @@ void GameRender()
 	Map_Draw();
 
 	R_DisableLighting();
+	
 
 	R_3D_DrawWireBox(1, 1.1f, 1, 5, 3, 5, MAKE_RGBA(0, 255, 255, 255));
 
@@ -360,7 +363,7 @@ int main(int argc, char **argv)
 	printf("load default resources\n");
 
 	// preload placeholders
-	R_LoadTex("content/images/placeholder.png", false, false);
+	R_LoadTex("content/images/placeholder.png", false, false, false);
 	R_3D_LoadMesh("content/meshes/placeholder.obj", 1);
 
 	R_2D_LoadDebugFont("content/images/asciifont2.png");
@@ -372,7 +375,7 @@ int main(int argc, char **argv)
 	printf("map init\n");
 
 	Map_Init();
-	Map_Create(32, 16, 32);
+	Map_Create(16, 8, 16);
 
 	printf("done...\n");
 

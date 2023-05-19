@@ -15,9 +15,9 @@ void R_Present(SDL_Window *window);
 
 void R_ResetView();
 
-R_TexID R_LoadTex(const char *path, const bool filter, const bool clamp);
-void R_ApplyTexFilter(const bool filter);
-void R_ApplyTexClamp(const bool clamp);
+R_TexID R_LoadTex(const char *path, const bool filter, const bool clamp, const bool mipmapped);
+void R_ApplyTexFilter(const R_TexID texID, const bool filter);
+void R_ApplyTexClamp(const R_TexID texID, const bool clamp);
 void R_BindTex(const R_TexID texID);
 void R_GetTexSize(const R_TexID texID, unsigned int *w, unsigned int *h);
 
