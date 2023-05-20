@@ -37,9 +37,15 @@ int g_inputTick;
 // functions
 bool file_exists(const char *filename)
 {
+	//struct stat   buffer;
+	//return (stat(filename, &buffer) == 0);
+	FILE *f = fopen(filename, "r");
+	if (f == NULL)
+	{
+		return false;
+	}
+	fclose(f);
 	return true;
-	struct stat   buffer;
-	return (stat(filename, &buffer) == 0);
 }
 
 //float lerp(float a, float b, float f)
