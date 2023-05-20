@@ -4,6 +4,9 @@
 #include "r_core.h"
 #include "epicfail.h"
 
+#define QOI_IMPLEMENTATION
+#include "qoi/qoi.h"
+
 #ifndef GL_MULTISAMPLE
 #define GL_MULTISAMPLE  0x809D
 #endif
@@ -24,10 +27,10 @@ typedef struct R_TexInfo
 
 } R_TexInfo;
 
-SDL_GLContext glContext;
+//SDL_GLContext glContext;
 int colorBits = 24;
 int depthBits = 16;
-bool mipfilter = true;
+bool mipfilter = false;
 
 #define MAX_TEXTURES 256
 R_TexInfo textures[MAX_TEXTURES];
@@ -35,27 +38,31 @@ R_TexID nextTexSlot = 0;
 
 float clearR, clearG, clearB;
 
-void R_Init(SDL_Window *window)
+void R_Config()
 {
 	if (g_newIni)
 	{
 		WritePrivateProfileStringA("Renderer", "swap_interval", "0", ENGINE_INI_PATH);
 		WritePrivateProfileStringA("Renderer", "color_bits", "24", ENGINE_INI_PATH);
 		WritePrivateProfileStringA("Renderer", "depth_bits", "16", ENGINE_INI_PATH);
-		WritePrivateProfileStringA("Renderer", "mip_filter", "1", ENGINE_INI_PATH);
+		WritePrivateProfileStringA("Renderer", "mip_filter", "0", ENGINE_INI_PATH);
 	}
 
 	memset(textures, 0, sizeof(textures));
 
 	colorBits = GetPrivateProfileIntA("Renderer", "color_bits", 24, ENGINE_INI_PATH);
 	depthBits = GetPrivateProfileIntA("Renderer", "depth_bits", 16, ENGINE_INI_PATH);
-	mipfilter = GetPrivateProfileIntA("Renderer", "mip_filter", 1, ENGINE_INI_PATH);
+	mipfilter = GetPrivateProfileIntA("Renderer", "mip_filter", 0, ENGINE_INI_PATH);
+
+	printf("Color Depth: %i\n", colorBits);
+	printf("Depth Bits: %i\n", depthBits);
+	printf("Mip Filter: %i\n", mipfilter);
 
 	// Settings
 	
 	// request opengl 1.1
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
+	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 	
 	if (colorBits == 16)
 	{
@@ -80,13 +87,16 @@ void R_Init(SDL_Window *window)
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-	glContext = SDL_GL_CreateContext(window);
-	CheckFail(glContext == NULL, 0, "R_Init OpenGL context creation failed", NULL, 0);
-
 	int swap_interval = GetPrivateProfileIntA("Renderer", "swap_interval", 0, ENGINE_INI_PATH);
-	
-	SDL_GL_SetSwapInterval(swap_interval);
+	printf("VSync: %i\n", swap_interval);
+	SDL_GL_SetAttribute(SDL_GL_SWAP_CONTROL, swap_interval);
 
+	//glContext = SDL_GL_CreateContext(window);
+	//CheckFail(glContext == NULL, 0, "R_Init OpenGL context creation failed", NULL, 0);
+}
+
+void R_PostConfig()
+{
 	glShadeModel(GL_FLAT);
 	//glEnable(GL_MULTISAMPLE);
 
@@ -138,10 +148,10 @@ void R_Clear(const bool color, const bool depth)
 	R_CheckError();
 }
 
-void R_Present(SDL_Window *window)
+void R_Present()
 {
 	// display to screen
-	SDL_GL_SwapWindow(window);
+	SDL_GL_SwapBuffers();
 	R_CheckError();
 }
 
@@ -171,21 +181,33 @@ R_TexID R_LoadTex(const char *path, const bool filter, const bool clamp, const b
 		}
 	}
 
-	SDL_Surface *surf = IMG_Load(path);
-	CheckFail(surf == NULL, 0, "R_LoadTex surf is null", path, FAILFLAG_CANCONTINUE);
+	printf("Load Tex %s ...", path);
 
-	char *pixels = malloc(surf->w * surf->h * 4);
+	//SDL_Surface *surf = IMG_Load(path);
+	//CheckFail(surf == NULL, 0, "R_LoadTex surf is null", path, FAILFLAG_CANCONTINUE);
 
-	int convcode = SDL_ConvertPixels(
+	//char *pixels = malloc(surf->w * surf->h * 4);
+
+	/*SDL_PixelFormat pixelFormat;
+	SDL_Surface *convsurf;*/
+
+	//int convcode;
+	/*int convcode = SDL_ConvertPixels(
 		surf->w, surf->h,
 		surf->format->format,
 		surf->pixels,
 		surf->pitch,
 		SDL_PIXELFORMAT_ABGR8888,
 		pixels,
-		surf->w * SDL_BYTESPERPIXEL(SDL_PIXELFORMAT_ABGR8888));
-	CheckFail(convcode, 0, "R_LoadTex pixel conversion failed", SDL_GetError(), FAILFLAG_CANCONTINUE);
+		surf->w * SDL_BYTESPERPIXEL(SDL_PIXELFORMAT_ABGR8888));*/
+	
 
+	//CheckFail(convcode, 0, "R_LoadTex pixel conversion failed", SDL_GetError(), FAILFLAG_CANCONTINUE);
+
+	qoi_desc imgdesc;
+	void *pixels = qoi_read(path, &imgdesc, 4);
+
+	CheckFail(pixels != NULL, true, "R_LoadTex failed to load QOI", path, FAILFLAG_CANCONTINUE);
 
 	unsigned int glTexID;
 
@@ -194,8 +216,8 @@ R_TexID R_LoadTex(const char *path, const bool filter, const bool clamp, const b
 
 	R_TexID slot = nextTexSlot++;
 	textures[slot].glTexID = glTexID;
-	textures[slot].width = surf->w;
-	textures[slot].height = surf->h;
+	textures[slot].width = imgdesc.width;
+	textures[slot].height = imgdesc.height;
 	textures[slot].allocated = true;
 	textures[slot].mipmapped = mipmapped;
 	
@@ -211,11 +233,11 @@ R_TexID R_LoadTex(const char *path, const bool filter, const bool clamp, const b
 	int texformat = (colorBits == 24) ? GL_RGBA : GL_RGB5_A1;
 	if (mipmapped)
 	{
-		gluBuild2DMipmaps(GL_TEXTURE_2D, texformat, surf->w, surf->h, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+		gluBuild2DMipmaps(GL_TEXTURE_2D, texformat, textures[slot].width, textures[slot].height, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 	}
 	else
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, texformat, surf->w, surf->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+		glTexImage2D(GL_TEXTURE_2D, 0, texformat, textures[slot].width, textures[slot].height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 	}
 
 	GLfloat color[4] = { 0,0,0,1 };
@@ -226,18 +248,43 @@ R_TexID R_LoadTex(const char *path, const bool filter, const bool clamp, const b
 	R_ApplyTexFilter(slot, filter);
 	R_ApplyTexClamp(slot, clamp);
 
-	SDL_FreeSurface(surf);
+	//SDL_FreeSurface(surf);
 	free(pixels);
+
+	printf(" done!\n");
 
 	return slot;
 }
 
+R_TexID boundTexID = -1;
 void R_BindTex(const R_TexID texID)
 {
-	unsigned int glTexID = textures[texID].glTexID;
-	glBindTexture(GL_TEXTURE_2D, glTexID);
-	//boundTexID = texID;
-	R_CheckError();
+	if (boundTexID != texID)
+	{
+		unsigned int glTexID = textures[texID].glTexID;
+		glBindTexture(GL_TEXTURE_2D, glTexID);
+		boundTexID = texID;
+		R_CheckError();
+	}
+	
+}
+
+bool texEnabled = false;
+void R_SetTexEnabled(bool enabled)
+{
+	if (texEnabled != enabled)
+	{
+		if (enabled)
+		{
+			glEnable(GL_TEXTURE_2D);
+		}
+		else
+		{
+			glDisable(GL_TEXTURE_2D);
+		}
+
+		texEnabled = enabled;
+	}
 }
 
 // Sets if filtering is enabled or disable for the current texture

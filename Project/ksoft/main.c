@@ -12,8 +12,8 @@
 
 // private variabl;es....
 bool running = true;
-int screenWidth = 720, screenHeight = 480;
-SDL_Window *window;
+int screenWidth = 320, screenHeight = 240;
+//SDL_Window *window;
 float updateFrequency = 1.0f / 30.0f;
 int maxFrameUpdates = 2;
 bool fullscreen = false;
@@ -58,16 +58,18 @@ void InitAudio()
 
 	sampleRate = GetPrivateProfileIntA("Audio", "sample_rate", 44100, ENGINE_INI_PATH);
 
-	int result = Mix_OpenAudio(sampleRate, AUDIO_S16SYS, 2, 512);
+	/*int result = Mix_OpenAudio(sampleRate, AUDIO_S16SYS, 2, 512);
 	if (result < 0)
 		CheckFail(result, 0, "InitAudio: Mix_OpenAudio failed", Mix_GetError(), 0);
 
 	result = Mix_AllocateChannels(16);
 	if (result < 0)
-		CheckFail(result, 0, "InitAudio: Mix_AllocateChannels failed", Mix_GetError(), 0);
+		CheckFail(result, 0, "InitAudio: Mix_AllocateChannels failed", Mix_GetError(), 0);*/
+
+	printf("InitAudio: Unimplemented\n");
 }
 
-void HandleInputKey(SDL_KeyCode key, bool pressed)
+void HandleInputKey(SDLKey key, bool pressed)
 {
 	if (pressed)
 	{
@@ -78,10 +80,11 @@ void HandleInputKey(SDL_KeyCode key, bool pressed)
 			break;
 		case SDLK_F11:
 			fullscreen = !fullscreen;
-			if (fullscreen)
+			/*if (fullscreen)
 				SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 			else
-				SDL_SetWindowFullscreen(window, 0);
+				SDL_SetWindowFullscreen(window, 0);*/
+
 			break;
 		}
 	}
@@ -99,27 +102,24 @@ void UpdateEvents()
 		case SDL_QUIT:
 			running = false;
 			break;
-		case SDL_WINDOWEVENT:
-			if (ev.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
-			{
-				screenWidth = ev.window.data1;
-				screenHeight = ev.window.data2;
-			}
+		case SDL_VIDEORESIZE:
+			screenWidth = ev.resize.w;
+			screenHeight = ev.resize.h;
 			break;
 		case SDL_KEYDOWN:
 			HandleInputKey(ev.key.keysym.sym, true);
-			Input_HandleScancodeEvent(ev.key.keysym.scancode, true);
+			Input_HandleScancodeEvent(ev.key.keysym.sym, true);
 			break;
 		case SDL_KEYUP:
 			HandleInputKey(ev.key.keysym.sym, false);
-			Input_HandleScancodeEvent(ev.key.keysym.scancode, false);
+			Input_HandleScancodeEvent(ev.key.keysym.sym, false);
 			break;
 		}
 	}
 }
 
-Uint64 startFrameCounter, lastFrameCounter;
-Uint64 startUpdateCounter, lastUpdateCounter;
+Uint32 startFrameCounter, lastFrameCounter;
+Uint32 startUpdateCounter, lastUpdateCounter;
 
 float squarepos, lastsquarepos;
 float cubeTime, lastCubeTime;
@@ -135,8 +135,8 @@ float lastCamYaw = 225;
 
 void GameLoad()
 {
-	tex_test = R_LoadTex("content/images/kyo_test.png", true, true, false);
-	tex_crosshair = R_LoadTex("content/images/crosshair_default.png", false, false, false);
+	//tex_test = R_LoadTex("content/images/kyo_test.qoi", true, true, false);
+	tex_crosshair = R_LoadTex("content/images/crosshair_default.qoi", false, false, false);
 	mesh_test = R_3D_LoadMesh("content/meshes/funkybox.obj", 1.0f);
 
 	//Mix_Music *music = Mix_LoadMUS("music/storm_6_alt_2.mp3");
@@ -166,59 +166,67 @@ void GameUpdate()
 	lastCamPitch = camPitch;
 	lastCamYaw = camYaw;
 
-	if (Input_IsKeyDown(SDL_SCANCODE_UP))
+	//printf("	Apply Rotational Input\n");
+
+	if (Input_IsKeyDown(SDLK_UP))
 	{
 		camPitch += 90 * g_updateDelta;
 	}
-	if (Input_IsKeyDown(SDL_SCANCODE_DOWN))
+	if (Input_IsKeyDown(SDLK_DOWN))
 	{
 		camPitch -= 90 * g_updateDelta;
 	}
-	if (Input_IsKeyDown(SDL_SCANCODE_LEFT))
+	if (Input_IsKeyDown(SDLK_LEFT))
 	{
 		camYaw += 90 * g_updateDelta;
 	}
-	if (Input_IsKeyDown(SDL_SCANCODE_RIGHT))
+	if (Input_IsKeyDown(SDLK_RIGHT))
 	{
 		camYaw -= 90 * g_updateDelta;
 	}
+
+	//printf("	Setup Directional Input\n");
 
 	vec3 forward = { -sinf(glm_rad(camYaw)), 0, -cosf(glm_rad(camYaw))};
 	vec3 left = { -sinf(glm_rad(camYaw) + CGLM_PI_2), 0, -cosf(glm_rad(camYaw) + CGLM_PI_2) };
 
 	vec3 moveTarget = {0, 0, 0};
 
-	if (Input_IsKeyDown(SDL_SCANCODE_W))
+	//printf("	Setup Directional Input\n");
+
+	if (Input_IsKeyDown(SDLK_w))
 	{
 		glm_vec3_add(moveTarget, forward, moveTarget);
 	}
-	if (Input_IsKeyDown(SDL_SCANCODE_S))
+	if (Input_IsKeyDown(SDLK_s))
 	{
 		glm_vec3_sub(moveTarget, forward, moveTarget);
 	}
-	if (Input_IsKeyDown(SDL_SCANCODE_A))
+	if (Input_IsKeyDown(SDLK_a))
 	{
 		glm_vec3_add(moveTarget, left, moveTarget);
 	}
-	if (Input_IsKeyDown(SDL_SCANCODE_D))
+	if (Input_IsKeyDown(SDLK_d))
 	{
 		glm_vec3_sub(moveTarget, left, moveTarget);
 	}
 
+	//printf("	Normalize moveTarget\n");
 	glm_vec3_normalize(moveTarget);
 
-	if (Input_IsKeyDown(SDL_SCANCODE_Q))
+	if (Input_IsKeyDown(SDLK_q))
 	{
 		moveTarget[1] -= 1;
 	}
-	if (Input_IsKeyDown(SDL_SCANCODE_E))
+	if (Input_IsKeyDown(SDLK_e))
 	{
 		moveTarget[1] += 1;
 	}
 
-
+	//printf("	Scale moveTarget\n");
 	glm_vec3_scale(moveTarget, g_updateDelta * 4, moveTarget);
 
+	//printf("	Apply Directional Input\n");
 	glm_vec3_copy(camViewpoint, lastCamViewpoint);
 	glm_vec3_add(camViewpoint, moveTarget, camViewpoint);
 }
@@ -269,9 +277,11 @@ void GameRender()
 	R_SetLightDiffuse(0, (vec4) { 1.5f, 1.5f, 1.5f, 1 });
 	R_SetLightAmbient(0, (vec4) { 1.0f, 1.0f, 1.0f, 1 });
 
+	R_DisableLighting();
+
 	Map_Draw();
 
-	R_DisableLighting();
+	
 	
 
 	R_3D_DrawWireBox(1, 1.1f, 1, 5, 3, 5, MAKE_RGBA(0, 255, 255, 255));
@@ -336,15 +346,29 @@ int main(int argc, char **argv)
 	printf("initializing SDL\n");
 
 	// SDL initialization
-	int initcode = SDL_Init(SDL_INIT_EVENTS | SDL_INIT_AUDIO | SDL_INIT_VIDEO);
+	int initflags = SDL_INIT_AUDIO | SDL_INIT_VIDEO;
+
+#if _DEBUG
+	initflags |= SDL_INIT_NOPARACHUTE;
+#endif
+
+	int initcode = SDL_Init(initflags);
 	if (initcode != 0)
 	{
 		CheckFail(initcode, 0, "SDL init failed", SDL_GetError(), 0);
 	}
 
-	int windowflags = SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
-	window = SDL_CreateWindow("KSoft3D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, windowflags);
-	CheckFail(window == NULL, 0, "Window creation failed", NULL, 0);
+	SDL_VideoInfo* info = SDL_GetVideoInfo();
+
+
+
+	R_Config();
+
+	int windowflags = SDL_OPENGL | SDL_RESIZABLE;
+	int result = SDL_SetVideoMode(screenWidth, screenHeight, info->vfmt->BitsPerPixel, windowflags);
+	//CheckFail(result == 0, true, "Window creation failed", NULL, 0);
+
+	R_PostConfig();
 
 	printf("done...\n");
 
@@ -355,7 +379,7 @@ int main(int argc, char **argv)
 	printf("rasterizer init\n");
 
 	// renderer init
-	R_Init(window);
+	//R_Init(window);
 	R_3D_Init();
 
 	printf("done...\n");
@@ -363,10 +387,10 @@ int main(int argc, char **argv)
 	printf("load default resources\n");
 
 	// preload placeholders
-	R_LoadTex("content/images/placeholder.png", false, false, false);
+	R_LoadTex("content/images/placeholder.qoi", false, false, false);
 	R_3D_LoadMesh("content/meshes/placeholder.obj", 1);
 
-	R_2D_LoadDebugFont("content/images/asciifont2.png");
+	R_2D_LoadDebugFont("content/images/asciifont2.qoi");
 
 	printf("done...\n");
 
@@ -375,7 +399,7 @@ int main(int argc, char **argv)
 	printf("map init\n");
 
 	Map_Init();
-	Map_Create(16, 8, 16);
+	Map_Create(4, 8, 4);
 
 	printf("done...\n");
 
@@ -391,16 +415,22 @@ int main(int argc, char **argv)
 	printf("start main loop\n");
 
 	// reset counters
-	startUpdateCounter = startFrameCounter = lastUpdateCounter = lastFrameCounter = SDL_GetPerformanceCounter();
-	Uint64 perfFreq = SDL_GetPerformanceFrequency();
+	startUpdateCounter = SDL_GetTicks();
+	startFrameCounter = SDL_GetTicks();
+	lastUpdateCounter = SDL_GetTicks();
+	lastFrameCounter = SDL_GetTicks();
+	Uint32 perfFreq = 1000;//SDL_GetPerformanceFrequency();
 
 	while (running)
 	{
-		Uint64 loopStartCounter = SDL_GetPerformanceCounter();
+		//printf("Loop Start\n");
 
+		Uint32 loopStartCounter = SDL_GetTicks();
+
+		//printf("UpdateEvents\n");
 		UpdateEvents();
 
-		Uint64 currentCounter = SDL_GetPerformanceCounter();
+		Uint32 currentCounter = SDL_GetTicks();
 
 		g_frameDelta = (currentCounter - lastFrameCounter) / (float)perfFreq;
 		g_frameTotal = (currentCounter - startFrameCounter) / (float)perfFreq;
@@ -418,9 +448,9 @@ int main(int argc, char **argv)
 		lastFrameCounter = currentCounter;
 
 		g_updateDelta = updateFrequency;
-		Uint64 addCounter = (Uint64)(updateFrequency * (double)perfFreq);
+		Uint32 addCounter = (Uint32)(updateFrequency * (double)perfFreq);
 
-		Uint64 cpuUpdateStartCounter = SDL_GetPerformanceCounter();
+		Uint32 cpuUpdateStartCounter = SDL_GetTicks();
 
 		for (int i = 0; i < maxFrameUpdates; i++)
 		{
@@ -431,6 +461,7 @@ int main(int argc, char **argv)
 				g_updateTotal = (lastUpdateCounter - startUpdateCounter) / (float)perfFreq;
 
 				// tick
+				//printf("GameUpdate\n");
 				GameUpdate();
 				g_inputTick++;
 			}
@@ -442,7 +473,7 @@ int main(int argc, char **argv)
 			startUpdateCounter += addCounter;
 		}
 
-		Uint64 cpuUpdateEndCounter = SDL_GetPerformanceCounter();
+		Uint32 cpuUpdateEndCounter = SDL_GetTicks();
 
 		g_interp = ((currentCounter - lastUpdateCounter) / (float)perfFreq) / updateFrequency;
 
@@ -450,28 +481,34 @@ int main(int argc, char **argv)
 		if (g_interp > 1.0f)
 			g_interp = 1.0f;
 		
-		Uint64 drawStartCounter = SDL_GetPerformanceCounter();
+		Uint32 drawStartCounter = SDL_GetTicks();
 
 		R_SetViewport(0, 0, screenWidth, screenHeight);
 		R_SetClearColor(0.1f, 0.15f, 0.25f);
 		R_Clear(true, true);
 
+		//printf("GameRender\n");
 		GameRender();
 
-		Uint64 cpuDrawEndCounter = SDL_GetPerformanceCounter();
+		Uint32 cpuDrawEndCounter = SDL_GetTicks();
 
 		// frame is done, present all the contents to the window
-		R_Present(window);
+		//printf("R_Present\n");
+		R_Present();
 
-		Uint64 totalDrawEndCounter = SDL_GetPerformanceCounter();
+		Uint32 totalDrawEndCounter = SDL_GetTicks();
 
-		Uint64 loopEndCounter = SDL_GetPerformanceCounter();
+		Uint32 loopEndCounter = SDL_GetTicks();
 
+		//printf("Perf Count\n");
 		// count numbers
 		cpuUpdateTimeMS = ((cpuUpdateEndCounter - cpuUpdateStartCounter) / (float)perfFreq) * 1000.0f;
 		cpuDrawTimeMS = ((cpuDrawEndCounter - drawStartCounter) / (float)perfFreq) * 1000.0f;
 		totalDrawTimeMS = ((totalDrawEndCounter - drawStartCounter) / (float)perfFreq) * 1000.0f;
 		totalLoopTimeMS = ((loopEndCounter - loopStartCounter) / (float)perfFreq) * 1000.0f;
+
+		//printf("Loop End\n");
+
 	}
 
 
@@ -479,5 +516,7 @@ int main(int argc, char **argv)
 
 	printf("exited :(\n");
 
+	SDL_Quit();
+	exit(EXIT_SUCCESS);
 	return EXIT_SUCCESS;
 }

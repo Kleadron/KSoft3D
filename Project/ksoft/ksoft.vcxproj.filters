@@ -16,6 +16,9 @@
     <Filter Include="cglm headers">
       <UniqueIdentifier>{3b5f6f28-1449-47f3-aa05-6c5e3765b326}</UniqueIdentifier>
     </Filter>
+    <Filter Include="qoi header">
+      <UniqueIdentifier>{035232ae-4e88-40fb-8336-99b0547c9d0c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -42,462 +45,18 @@
     <ClCompile Include="r_3d_tm.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sdlfix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdlfix2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="cglm\simd\x86.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\affine.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\affine.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\simd\avx\affine.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\simd\neon\affine.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\affine.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\simd\sse2\affine.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\affine2d.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\affine2d.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\affine2d.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\affine-mat.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\affine-post.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\affine-post.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\affine-pre.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\affine-pre.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\applesimd.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\simd\arm.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\bezier.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\bezier.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\box.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\box.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\box.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\cam.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\cam.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\cam.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\cglm.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\color.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\color.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\common.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\curve.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\curve.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\curve.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\ease.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\ease.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\euler.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\euler.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\euler.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\frustum.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\frustum.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\frustum.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\simd\intrin.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\io.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\io.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\io.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\ivec2.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\ivec2.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\ivec3.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\ivec3.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\ivec4.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\ivec4.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\mat2.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\simd\sse2\mat2.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\mat2.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\mat2.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\simd\neon\mat2.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\mat3.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\simd\sse2\mat3.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\mat3.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\mat3.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\simd\avx\mat4.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\mat4.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\mat4.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\mat4.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\simd\neon\mat4.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\simd\sse2\mat4.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\ortho_lh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\clipspace\ortho_lh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\clipspace\ortho_lh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\clipspace\ortho_lh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\clipspace\ortho_lh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\ortho_lh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\clipspace\ortho_rh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\clipspace\ortho_rh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\ortho_rh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\ortho_rh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\clipspace\ortho_rh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\clipspace\ortho_rh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\persp.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\clipspace\persp_lh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\persp_lh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\clipspace\persp_lh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\clipspace\persp_lh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\clipspace\persp_lh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\persp_lh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\clipspace\persp_rh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\clipspace\persp_rh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\persp_rh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\clipspace\persp_rh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\clipspace\persp_rh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\persp_rh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\plane.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\plane.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\plane.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\project.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\project.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\project.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\clipspace\project_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\project_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\clipspace\project_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\clipspace\project_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\clipspace\project_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\project_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\quat.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\quat.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\simd\sse2\quat.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\simd\neon\quat.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\quat.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\ray.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\ray.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\sphere.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\sphere.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\sphere.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\types.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\types-struct.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\util.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\vec2.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\vec2.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\vec2.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\vec2-ext.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\vec2-ext.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\vec3.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\vec3.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\vec3.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\vec3-ext.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\vec3-ext.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\vec4.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\vec4.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\vec4.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\vec4-ext.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\vec4-ext.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\version.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\view_lh.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\view_lh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\clipspace\view_lh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\clipspace\view_lh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\clipspace\view_lh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\view_lh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\clipspace\view_lh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\view_rh.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\clipspace\view_rh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\clipspace\view_rh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\view_rh_no.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\call\clipspace\view_rh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\struct\clipspace\view_rh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
-    <ClInclude Include="cglm\clipspace\view_rh_zo.h">
-      <Filter>cglm headers</Filter>
-    </ClInclude>
     <ClInclude Include="epicfail.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="r_2d.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="includes_base.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="r_3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="r_core.h">
@@ -515,8 +74,458 @@
     <ClInclude Include="input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cglm\affine.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\affine.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\simd\sse2\affine.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\simd\avx\affine.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\simd\neon\affine.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\affine2d.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\affine2d.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\affine-mat.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\affine-post.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\affine-pre.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\applesimd.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\simd\arm.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\bezier.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\bezier.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\box.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\box.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\cam.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\cam.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\cglm.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\color.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\common.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\curve.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\curve.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\ease.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\ease.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\euler.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\euler.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\frustum.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\frustum.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\simd\intrin.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\io.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\io.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\ivec2.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\ivec2.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\ivec3.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\ivec3.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\ivec4.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\ivec4.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\simd\sse2\mat2.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\mat2.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\mat2.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\simd\neon\mat2.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\mat3.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\mat3.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\simd\sse2\mat3.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\simd\avx\mat4.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\mat4.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\mat4.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\simd\neon\mat4.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\simd\sse2\mat4.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\ortho_lh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\clipspace\ortho_lh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\clipspace\ortho_lh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\ortho_lh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\clipspace\ortho_rh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\ortho_rh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\clipspace\ortho_rh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\ortho_rh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\persp.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\clipspace\persp_lh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\persp_lh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\persp_lh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\clipspace\persp_lh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\clipspace\persp_rh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\persp_rh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\persp_rh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\clipspace\persp_rh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\plane.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\plane.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\project.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\project.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\clipspace\project_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\project_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\clipspace\project_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\project_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\simd\neon\quat.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\quat.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\simd\sse2\quat.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\quat.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\ray.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\sphere.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\types.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\types-struct.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\util.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\vec2.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\vec2-ext.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\vec3.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\vec3-ext.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\vec4.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\vec4-ext.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\version.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\view_lh.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\view_lh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\view_lh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\view_rh.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\view_rh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\clipspace\view_rh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\simd\x86.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\clipspace\view_rh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\vec2.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\vec2.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\vec2-ext.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\vec3.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\vec3.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\vec3-ext.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\vec4.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\vec4.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\vec4-ext.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\clipspace\view_lh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\clipspace\view_lh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\clipspace\view_lh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\clipspace\view_lh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\clipspace\view_rh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\clipspace\view_rh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\clipspace\view_rh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\sphere.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\sphere.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\call\ray.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\quat.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\clipspace\project_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\clipspace\project_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\project.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\plane.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\clipspace\persp_rh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\clipspace\persp_rh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\clipspace\persp_lh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\clipspace\persp_lh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\clipspace\ortho_rh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\clipspace\ortho_rh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\clipspace\ortho_lh_zo.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\clipspace\ortho_lh_no.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\mat4.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\mat2.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\mat3.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\io.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\frustum.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\euler.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\curve.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\color.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\cam.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\box.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\affine-pre.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\affine-post.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\affine2d.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="cglm\struct\affine.h">
+      <Filter>cglm headers</Filter>
+    </ClInclude>
+    <ClInclude Include="r_2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="r_3d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="r_3d_tm.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="qoi\qoi.h">
+      <Filter>qoi header</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

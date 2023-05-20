@@ -25,7 +25,7 @@ void R_2D_ApplyProjection(const int left, const int right, const int bottom, con
 // disables GL_TEXTURE_2D and glBegin's quads
 void R_2D_DrawColorRect(const int x1, const int y1, const int x2, const int y2, const R_ColorRGBA rgba)
 {
-	glDisable(GL_TEXTURE_2D);
+	R_SetTexEnabled(false);
 
 	glBegin(GL_QUADS);
 	glColor4ubv((unsigned char*)&rgba);
@@ -46,7 +46,7 @@ void R_2D_DrawColorRect_WH(const int x, const int y, const int w, const int h, c
 // enables GL_TEXTURE_2D and glBegin's quads, uses whatever texture was bound beforehand
 void R_2D_DrawTexRect(const int x1, const int y1, const int x2, const int y2, const R_ColorRGBA rgba, const R_TexID tex)
 {
-	glEnable(GL_TEXTURE_2D);
+	R_SetTexEnabled(true);
 	R_BindTex(tex);
 
 	glBegin(GL_QUADS);
@@ -79,7 +79,7 @@ void R_2D_DrawDebugString(const int x, const int y, const R_ColorRGBA color, con
 
 	//glBindTexture(GL_TEXTURE_2D, glFontTex);
 
-	glEnable(GL_TEXTURE_2D);
+	R_SetTexEnabled(true);
 	R_BindTex(fontTex);
 
 	glColor4ubv((unsigned char*)&color);

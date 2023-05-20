@@ -1,9 +1,9 @@
 #pragma once
 
 void Input_Init();
-void Input_HandleScancodeEvent(SDL_Scancode scancode, bool pressed);
+void Input_HandleScancodeEvent(SDLKey key, bool pressed);
 
-bool Input_IsKeyDown(SDL_Scancode scancode);
-bool Input_IsKeyJustDown(SDL_Scancode scancode);
-bool Input_IsKeyUp(SDL_Scancode scancode);
-bool Input_IsKeyJustUp(SDL_Scancode scancode);
+bool Input_IsKeyDown(SDLKey key);
+bool Input_IsKeyJustDown(SDLKey key);
+bool Input_IsKeyUp(SDLKey key);
+bool Input_IsKeyJustUp(SDLKey key);

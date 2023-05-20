@@ -56,7 +56,7 @@ void R_3D_Init()
 
 void R_3D_DrawLine(const float x1, const float y1, const float z1, const float x2, const float y2, const float z2, const R_ColorRGBA color)
 {
-	glDisable(GL_TEXTURE_2D);
+	R_SetTexEnabled(false);
 
 	glColor4ubv((unsigned char*)&color);
 
@@ -145,6 +145,7 @@ R_3D_MeshID R_3D_LoadMesh(const char *path, const float scale)
 		}
 	}
 
+	printf("Load Mesh %s ...", path);
 
 	R_3D_MeshID slot = nextModelSlot++;
 	R_3D_MeshInfo *model = &models[slot];
@@ -280,6 +281,8 @@ R_3D_MeshID R_3D_LoadMesh(const char *path, const float scale)
 	SubmitMesh(model);
 	glEndList();
 
+	printf(" done!\n");
+
 	return slot;
 }
 
@@ -295,12 +298,12 @@ void R_3D_DrawMesh(const float x, const float y, const float z, const float pitc
 	// you can now use texID -1 to force no texture
 	if (texID >= 0 && model->hasUVs)
 	{
-		glEnable(GL_TEXTURE_2D);
+		R_SetTexEnabled(true);
 		R_BindTex(texID);
 	}
 	else
 	{
-		glDisable(GL_TEXTURE_2D);
+		R_SetTexEnabled(false);
 	}
 
 	//glPolygonMode(GL_FRONT, GL_LINE);

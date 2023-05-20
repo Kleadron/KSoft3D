@@ -1,7 +1,7 @@
 #pragma once
 
-#define ENGINE_INI_PATH ".\\engine.ini"
-#define USER_INI_PATH ".\\user.ini"
+#define ENGINE_INI_PATH ".\\ksoft3d_engine.ini"
+#define USER_INI_PATH ".\\ksoft3d_user.ini"
 
 #define MAKE_RGBA(r, g, b, a) (R_ColorRGBA)((r) | (g << 8) | (b << 16) | (a << 24))
 #define COLOR_WHITE MAKE_RGBA(255, 255, 255, 255)

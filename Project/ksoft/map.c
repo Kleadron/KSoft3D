@@ -31,7 +31,7 @@ bool InBounds(const int x, const int y, const int z)
 void Map_Init()
 {
 	mesh_block = R_3D_LoadMesh("content/meshes/block.obj", 1);
-	tex_block = R_LoadTex("content/images/rock.png", false, false, true);
+	tex_block = R_LoadTex("content/images/rock_16.qoi", false, false, true);
 }
 
 void Map_Create(const int width, const int height, const int length)
