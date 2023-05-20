@@ -245,7 +245,7 @@ void R_ApplyTexFilter(const R_TexID texID, const bool filter)
 {
 	R_BindTex(texID);
 
-	int filtermode;
+	//int filtermode;
 
 	if (textures[texID].mipmapped)
 	{

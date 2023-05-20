@@ -1,7 +1,6 @@
 #pragma once
 
 typedef int R_3D_MeshID;
-typedef int R_3D_TileMeshID;
 
 void R_3D_Init();
 
@@ -13,5 +12,3 @@ void R_3D_DrawWireBox(const float x1, const float y1, const float z1, const floa
 
 R_3D_MeshID R_3D_LoadMesh(const char *path, const float scale);
 void R_3D_DrawMesh(const float x, const float y, const float z, const float pitch, const float yaw, const float roll, const R_ColorRGBA color, const R_3D_MeshID modelID, const R_TexID texID);
-
-R_3D_TileMeshID R_3D_CreateTileMesh();

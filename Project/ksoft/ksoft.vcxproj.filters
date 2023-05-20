@@ -39,6 +39,9 @@
     <ClCompile Include="input.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="r_3d_tm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -510,6 +513,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="r_3d_tm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
